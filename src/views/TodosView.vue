@@ -70,13 +70,21 @@ import {  onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 
 
-const token = document.cookie.replace(/(?:^|.*;\s*)todoName\s*=\s*([^;]*).*$/i, "$1");
+
 
 const api = 'https://todolist-api.hexschool.io'
 
 const todosList = ref([])
 
 const tempList = ref([])
+
+const token = document.cookie.replace(/(?:^|.*;\s*)todoName\s*=\s*([^;]*).*$/i, "$1");
+
+// const token = ref('')
+
+// const checkToken = async ()=>{
+//   const res = await axios.get(`${api}/users/checkout`)
+// }
 
 
 const getTodos = async()=>{
@@ -90,12 +98,11 @@ const getTodos = async()=>{
 }
 
 defineProps(['nickname',  ])
-
+const emit = defineEmits(['showLogin', ])
 
 
 onMounted(()=>{
   getTodos();
-  // showTodos();
 
 })
 
@@ -106,23 +113,18 @@ const allTodos = ()=>{
   getTodos();
   isActive.value = 1
   tempList.value = todosList.value
-  // console.log('tempL: ', tempLength.value)
   tempLength.value = tempList.value.length
 }
 
 const notyetTodos = ()=>{
   isActive.value = 2
-  // getTodos();
   tempList.value = todosList.value.filter(x=>x.status===false)
-  // console.log('tempL: ', tempLength.value)
   tempLength.value = tempList.value.length
 }
 
 const okTodos = ()=>{
   isActive.value = 3
-  // getTodos();
   tempList.value = todosList.value.filter(x=>x.status===true)
-  // console.log('tempL: ', tempLength.value)
   tempLength.value = tempList.value.length
 }
 
@@ -173,7 +175,6 @@ const upddateTodos = async()=>{
 }
 
 const checkTodo = async(id)=>{
-  // console.log('check tempList',tempList.value)
   try {
     await axios.patch(`${api}/todos/${id}/toggle`,null, { headers:{authorization: token, },
       })
@@ -182,20 +183,18 @@ const checkTodo = async(id)=>{
         tempList.value.splice(index, 1)
         tempLength.value = tempList.value.length;
       }
-
-      // tempList.value = [...todosList.value]
-      // getTodos();
   } catch (error) {
     console.log('checkTodo error，', error)
   }
 }
 
+
 const signout = async()=>{
   try {
     const res = await axios.post(`${api}/users/sign_out`, {},
   { headers: { authorization: token, }})
-  // console.log(res)
   alert(res.data.message)
+    emit('showLogin', [true, false, false]);
   router.push('/')
   } catch (error) {
     console.log('signout error, ', error)

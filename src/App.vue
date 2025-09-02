@@ -1,9 +1,9 @@
 <script setup>
 import axios from 'axios';
-import {  onMounted, ref } from 'vue';
+import {  ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-// import { RouterLink, RouterView } from 'vue-router'
+
 const api = 'https://todolist-api.hexschool.io'
 const showDiv = ref({
   login: true,
@@ -11,10 +11,10 @@ const showDiv = ref({
   todos: false,
 })
 
-const showLogin = ()=>{
-  showDiv.value.login = true
-  showDiv.value.register = false
-  showDiv.value.todos = false
+const showLogin = (data)=>{
+  showDiv.value.login = data[0]
+  showDiv.value.register = data[1]
+  showDiv.value.todos = data[2]
 }
 const showRegister = ()=>{
   showDiv.value.login = false
@@ -70,19 +70,19 @@ const loginData = ref('')
 
 const router = useRouter();
 const nickname = ref('')
-// const token = ''
+
 const loginBtn = async ()=>{
   try {
 
     const res = await axios.post(`${api}/users/sign_in`, account.value)
     loginData.value = res.data
-    // token = res.data.token;
+
     document.cookie = `todoName=${res.data.token};`;
     nickname.value = res.data.nickname
     showTodos();
     router.push('/todos')
   } catch (error) {
-    // console.log(error)
+
     alert(error.response.data.message)
     router.push('/')
   }
@@ -143,53 +143,11 @@ const loginBtn = async ()=>{
 </div>
 
 <!-- ToDo List -->
-<!-- <div id="todoListPage" class="bg-half" v-if="showDiv.todos">
-  <nav>
-    <h1><a href="#">ONLINE TODO LIST</a></h1>
-    <ul>
-      <li class="todo_sm"><a href="#"><span>{{ loginData.nickname }}的代辦</span></a></li>
-      <li><a href="#loginPage">登出</a></li>
-    </ul>
-  </nav>
-  <div class="conatiner todoListPage vhContainer">
-    <div class="todoList_Content">
-      <div class="inputBox">
-        <input type="text" placeholder="請輸入待辦事項">
-        <a href="#">
-          <i class="fa fa-plus"></i>
-        </a>
-      </div>
-      <div class="todoList_list">
-        <ul class="todoList_tab">
-          <li><a href="#" class="active">全部</a></li>
-          <li><a href="#">待完成</a></li>
-          <li><a href="#">已完成</a></li>
-        </ul>
-        <div class="todoList_items">
-          <ul class="todoList_item">
-            <li>
-              <label class="todoList_label">
-                <input class="todoList_input" type="checkbox" value="true">
-                <span>把冰箱發霉的檸檬拿去丟</span>
-              </label>
-              <a href="#">
-                <i class="fa fa-times"></i>
-              </a>
-            </li>
 
-          </ul>
-          <div class="todoList_statistics">
-            <p> 5 個已完成項目</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 <RouterView
 v-if="showDiv.todos"
   :nickname="nickname"
-  :showTodos="showTodos"
+  @showLogin="showLogin"
   />
 
 </template>
