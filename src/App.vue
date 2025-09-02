@@ -34,7 +34,6 @@ const user = ref({
 const password2 = ref('')
 const checkpassword = ref('')
 
-
 const registerData = ref('')
 // 有UID
 
