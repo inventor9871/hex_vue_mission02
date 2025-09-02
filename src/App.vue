@@ -29,7 +29,7 @@ const showTodos = ()=>{
 
 
 const user = ref({
-  email:'asd@asd.com', password:'asdasd', nickname:'asd',
+  email:'', password:'', nickname:'',
 })
 const password2 = ref('')
 const checkpassword = ref('')

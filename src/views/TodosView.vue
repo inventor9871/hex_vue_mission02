@@ -80,11 +80,6 @@ const tempList = ref([])
 
 const token = document.cookie.replace(/(?:^|.*;\s*)todoName\s*=\s*([^;]*).*$/i, "$1");
 
-// const token = ref('')
-
-// const checkToken = async ()=>{
-//   const res = await axios.get(`${api}/users/checkout`)
-// }
 
 
 const getTodos = async()=>{
