@@ -1,5 +1,5 @@
 
-### 最終任務 todoList，注意事項如下
+### 最終任務 todoList，注意事項如下[作業](https://inventor9871.github.io/hex_vue_mission02/#/)
 - [codePen模板](https://codepen.io/hexschool/pen/qBzEMdm)
 - [API](https://todolist-api.hexschool.io/doc/#/)
 - 必做：需使用 Vue 框架來挑戰，並整合此任務提供的 API
