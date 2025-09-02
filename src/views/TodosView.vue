@@ -64,13 +64,11 @@
   </div>
 </div>
 </template>
+
 <script setup>
 import axios from 'axios';
 import {  onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
-
-
-
 
 const api = 'https://todolist-api.hexschool.io'
 

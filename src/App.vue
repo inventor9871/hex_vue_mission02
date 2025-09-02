@@ -62,7 +62,7 @@ try {
 }
 
 const account = ref({
-  email:'asd@asd.com', password: 'asdasd',
+  email:'', password: '',
 })
 
 const loginData = ref('')
