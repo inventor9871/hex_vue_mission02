@@ -134,7 +134,7 @@ const loginBtn = async ()=>{
         <input class="formControls_input" type="password" name="pwd2" id="pwd2" placeholder="請再次輸入密碼" required v-model="password2">
         <p class="text-danger formControls_btnLink pt-1">{{ checkpassword }}</p>
         <input class="formControls_btnSubmit" type="button"  value="註冊帳號" @click="registerBtn">
-        <a class="formControls_btnLink" href="#loginPage"  @click.prevent="showLogin">登入</a>
+        <a class="formControls_btnLink" href="#loginPage"  @click.prevent="showLogin([true, false, false])">登入</a>
       </form>
     </div>
   </div>
