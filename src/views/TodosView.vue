@@ -169,7 +169,7 @@ const upddateTodos = async()=>{
 
 const checkTodo = async(id)=>{
   try {
-    await axios.patch(`${api}/todos/${id}/toggle`,null, { headers:{authorization: token, },
+    await axios.patch(`${api}/todos/${id}/toggle`,{}, { headers:{authorization: token, },
       })
       if(isActive.value!==1){
         const index = tempList.value.findIndex(x=>x.id === id)

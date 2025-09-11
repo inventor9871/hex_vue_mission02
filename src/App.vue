@@ -49,14 +49,11 @@ try {
     alert('註冊成功')
     console.log(res)
     registerData.value = res.data
-    showLogin();
+    showLogin([true, false, false]);
   }
 } catch (error) {
-    if(error.status){
-      alert('帳號已經註冊過了')
-    }else{
-      alert('something wrong in the register')
-    }
+    alert(error.response.data.message)
+
   }
 }
 
